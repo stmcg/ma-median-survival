@@ -65,3 +65,7 @@ The data application uses the following files:
 
 - ``data-illustration.csv``: Contains the dataset.
 - ``application.R``: Contains the code for the data application.
+
+## Illustration in Appendix B
+
+The illustration in Appendix B uses the file ``appendix-b.R``.
