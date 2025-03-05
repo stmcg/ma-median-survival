@@ -1,6 +1,6 @@
 # Meta-Analysis of Median Survival Times
 
-This repository contains the data and code used for the analyses in "Meta-analysis of median survival times with inverse variance weighting" by Sean McGrath, Jonathan Kimmelman, Omer Ozturk, Russell Steele, and Andrea Benedetti. 
+This repository contains the data and code used for the analyses in "Meta-analysis of median survival times with inverse-variance weighting" by Sean McGrath, Jonathan Kimmelman, Omer Ozturk, Russell Steele, and Andrea Benedetti. 
 
 ---
 
