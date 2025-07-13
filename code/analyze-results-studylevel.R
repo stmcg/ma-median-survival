@@ -172,3 +172,49 @@ xtable(round(100 * relative_bias_weibull), digits = 0)
 xtable(round(100 * relative_bias_mixture), digits = 0)
 xtable(round(100 * relative_bias_weibull_skew_1), digits = 0)
 xtable(round(100 * relative_bias_weibull_skew_2), digits = 0)
+
+
+
+
+load('../results/sim-res-studylevel-bootstrap.RData')
+load('../results/sim-res-studylevel.RData')
+mydat <- cbind(res_1000[, 1], res_2000[, 1], res_5000[, 1], res_10000[, 1],
+               res_1000[, 2], res_2000[, 2], res_5000[, 2], res_10000[, 2],
+               res_1000[, 3], res_2000[, 3], res_5000[, 3], res_10000[, 3],
+               res_1000[, 4], res_2000[, 4], res_5000[, 4], res_10000[, 4]
+               )
+cols <- c('#EFE8F4', '#D9C7E3', '#BEA2CD', '#A58CB7')
+
+pdf('../results/StudyLevel-bootstrap.pdf', width = 6, height = 5)
+boxplot(mydat,
+        main = 'Exponential Event Times\nUniform Censoring',
+        col = rep(cols, times = 4),  # Soft colors
+        xaxt = 'n',
+        ylab = "Estimated SE", 
+        outline = FALSE, 
+        cex.main = 1.25, 
+        cex.lab = 1.15, 
+        cex.axis = 1.1)                     # Avoids outliers cluttering
+points(1:16, 
+       rep(sei_true[1:4], each = 4), 
+       col = 'red', pch = 19, cex = 1.25)
+axis(1, at = c(2.5, 6.5, 10.5, 14.5), labels = paste0("n=", all_n_subjects), cex.axis = 1.1)
+dev.off()
+
+relative_bias_bootstrap <- se_bootstrap <- matrix(NA, nrow = 4, ncol = 4)
+for (j in 1:4){
+  relative_bias_bootstrap[1, j] <- (mean(res_1000[, j], na.rm = TRUE) - sei_true[j]) / sei_true[j]
+  relative_bias_bootstrap[2, j] <- (mean(res_2000[, j], na.rm = TRUE) - sei_true[j]) / sei_true[j]
+  relative_bias_bootstrap[3, j] <- (mean(res_5000[, j], na.rm = TRUE) - sei_true[j]) / sei_true[j]
+  relative_bias_bootstrap[4, j] <- (mean(res_10000[, j], na.rm = TRUE) - sei_true[j]) / sei_true[j]
+  
+  se_bootstrap[1, j] <- sd(res_1000[, j], na.rm = TRUE)
+  se_bootstrap[2, j] <- sd(res_2000[, j], na.rm = TRUE)
+  se_bootstrap[3, j] <- sd(res_5000[, j], na.rm = TRUE)
+  se_bootstrap[4, j] <- sd(res_10000[, j], na.rm = TRUE)
+  
+}
+xtable(round(100 * relative_bias_bootstrap, 1), digits = 1)
+xtable(round(se_bootstrap, 2), digits = 2)
+
+

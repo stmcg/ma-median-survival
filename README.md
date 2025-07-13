@@ -27,6 +27,7 @@ The analyses were run on R version 4.4.1 with the following packages:
 #### Main Files
 
 - ``run-sims-studylevel.R``: Runs the study-level simulations. Results are saved in ``sim-res-studylevel.RData``.
+- ``run-sims-studylevel-bootstrap.R``: Runs the study-level simulations that evaluate the impact of the number of bootstrap replicates. Results are saved in ``sim-res-studylevel-bootstrap.RData``.
 - ``analyze-results-studylevel.R``: Analyzes the simulation results.
 
 #### Supporting Files
